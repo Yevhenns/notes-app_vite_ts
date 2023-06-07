@@ -1,28 +1,27 @@
-import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useAppDispatch, useAppSelector } from "./redux/hooks";
 import {
   addNewItem,
   deleteItem,
   editText,
   getNotesAll,
 } from "./redux/notesSlice";
-import { useSelector } from "react-redux";
-import Context from "./Context";
 import Header from "./components/Header/Header";
 import Main from "./components/Main/Main";
+import { INoteItem } from "./types/types";
 import css from "./App.module.scss";
 
-const App = () => {
-  const [currentNote, setCurrentNote] = useState({});
+const App: React.FC = () => {
+  const [currentNote, setCurrentNote] = useState({} as INoteItem);
   const [editMode, setEditMode] = useState(false);
   const [disabled, setDisabled] = useState(false);
-  const [currentText, setCurrentText] = useState(null);
+  const [currentText, setCurrentText] = useState(null as null | string);
   const [filterValue, setFilterValue] = useState("");
   const [menu, setMenu] = useState(false);
 
-  const notesAll = useSelector(getNotesAll);
+  const notesAll = useAppSelector(getNotesAll);
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const currentNoteLength = Object.keys(currentNote).length;
   const currentNoteId = currentNote.id;
@@ -47,21 +46,23 @@ const App = () => {
     setMenu(isMenuOpen);
   };
 
-  const addNewNote = (newItem) => {
+  const addNewNote = (newItem: INoteItem) => {
     dispatch(addNewItem(newItem));
     setCurrentText(null);
   };
 
-  const showNote = (id) => {
+  const showNote = (id: string) => {
     const currentEl = notesAll.find((element) => element.id === id);
-    setCurrentNote(currentEl);
-    setEditMode(false);
-    setCurrentText(null);
+    if (currentEl !== undefined) {
+      setCurrentNote(currentEl);
+      setEditMode(false);
+      setCurrentText(null);
+    }
   };
 
   const deleteNote = () => {
     dispatch(deleteItem(currentNoteId));
-    setCurrentNote({});
+    setCurrentNote({} as INoteItem);
   };
 
   const enableEdit = () => {
@@ -71,7 +72,7 @@ const App = () => {
     }
   };
 
-  const getText = (text) => {
+  const getText = (text: string) => {
     setCurrentText(text);
   };
 
@@ -79,31 +80,31 @@ const App = () => {
     setFilterValue(searchText.toLowerCase());
   };
 
-  const value = {
-    currentNote,
-    editMode,
-    disabled,
-    currentText,
-    filterValue,
-    menu,
-    notesAll,
-    currentNoteLength,
-    burgerMenu,
-    addNewNote,
-    showNote,
-    deleteNote,
-    enableEdit,
-    getText,
-    searchByName,
-  };
-
   return (
-    <Context.Provider value={value}>
-      <div className={css.wrapper}>
-        <Header />
-        <Main />
-      </div>
-    </Context.Provider>
+    <div className={css.wrapper}>
+      <Header
+        burgerMenu={burgerMenu}
+        editMode={editMode}
+        currentText={currentText}
+        currentNoteLength={currentNoteLength}
+        searchByName={searchByName}
+        addNewNote={addNewNote}
+        deleteNote={deleteNote}
+        enableEdit={enableEdit}
+        disabled={disabled}
+      />
+      <Main
+        menu={menu}
+        notesAll={notesAll}
+        searchByName={searchByName}
+        showNote={showNote}
+        filterValue={filterValue}
+        currentNote={currentNote}
+        editMode={editMode}
+        getText={getText}
+        currentNoteLength={currentNoteLength}
+      />
+    </div>
   );
 };
 

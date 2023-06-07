@@ -1,12 +1,9 @@
-import { useContext } from "react";
-import Context from "../../Context";
+import React from "react";
 import ListItem from "../ListItem/ListItem";
+import { TSideBar } from "../../types/types";
 import css from "./Sidebar.module.scss";
 
-const Sidebar = () => {
-  const value = useContext(Context);
-  const { notesAll, showNote, filterValue } = value;
-
+const Sidebar: React.FC<TSideBar> = ({ notesAll, showNote, filterValue }) => {
   const filteredArray = notesAll.filter((item) =>
     item.text.toLowerCase().includes(filterValue)
   );

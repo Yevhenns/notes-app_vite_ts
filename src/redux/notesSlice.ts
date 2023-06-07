@@ -1,22 +1,23 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { INoteItem } from "../types/types";
 
 const initialState = {
-  notesAll: [],
+  notesAll: [] as INoteItem[],
 };
 
 const notesSlice = createSlice({
   name: "notes",
   initialState,
   reducers: {
-    addNewItem(state, action) {
+    addNewItem(state, action: { payload: INoteItem }) {
       state.notesAll = [...state.notesAll, action.payload];
     },
-    deleteItem(state, action) {
+    deleteItem(state, action: { payload: string }) {
       state.notesAll = state.notesAll.filter(
         (item) => item.id !== action.payload
       );
     },
-    editText(state, action) {
+    editText(state, action: { payload: { id: string; text: string } }) {
       const currentItemIndex = state.notesAll.findIndex(
         (element) => element.id === action.payload.id
       );
@@ -34,7 +35,8 @@ const notesSlice = createSlice({
 
 export const notesReducer = notesSlice.reducer;
 
-export const getNotesAll = (state) => state.notes.notesAll;
+export const getNotesAll = (state: { notes: { notesAll: INoteItem[] } }) =>
+  state.notes.notesAll;
 
 export const { addNewItem } = notesSlice.actions;
 export const { deleteItem } = notesSlice.actions;

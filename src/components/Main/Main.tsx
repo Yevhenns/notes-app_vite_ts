@@ -1,16 +1,23 @@
-import { useContext } from "react";
+import React from "react";
 import { useMediaQuery } from "react-responsive";
-import Context from "../../Context";
 import SearchBox from "../SearchBox/SearchBox ";
 import Sidebar from "../Sidebar/Sidebar";
 import Workspace from "../Workspace/Workspace";
 import { Box } from "@mui/material";
+import { TMain } from "../../types/types";
 import css from "./Main.module.scss";
 
-const Main = () => {
-  const value = useContext(Context);
-  const { menu, notesAll } = value;
-
+const Main: React.FC<TMain> = ({
+  menu,
+  notesAll,
+  searchByName,
+  showNote,
+  filterValue,
+  currentNote,
+  editMode,
+  getText,
+  currentNoteLength,
+}) => {
   const beforeTablet = useMediaQuery({ query: "(max-width: 479px)" });
   const tablet = useMediaQuery({ query: "(min-width: 480px)" });
 
@@ -24,19 +31,37 @@ const Main = () => {
             backgroundColor: "azure",
           }}
         >
-          <Workspace />
+          <Workspace
+            currentNote={currentNote}
+            editMode={editMode}
+            getText={getText}
+            currentNoteLength={currentNoteLength}
+          />
         </Box>
       )}
       {!menu && beforeTablet && notesAll.length !== 0 && (
         <>
-          <SearchBox />
-          <Sidebar />
+          <SearchBox searchByName={searchByName} />
+          <Sidebar
+            notesAll={notesAll}
+            showNote={showNote}
+            filterValue={filterValue}
+          />
         </>
       )}
       {tablet && (
         <>
-          <Sidebar />
-          <Workspace />
+          <Sidebar
+            notesAll={notesAll}
+            showNote={showNote}
+            filterValue={filterValue}
+          />
+          <Workspace
+            currentNote={currentNote}
+            editMode={editMode}
+            getText={getText}
+            currentNoteLength={currentNoteLength}
+          />
         </>
       )}
     </main>

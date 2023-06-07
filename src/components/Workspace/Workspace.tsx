@@ -1,13 +1,16 @@
-import { useContext } from "react";
-import Context from "../../Context";
+import React from "react";
+import { TWorkspace } from "../../types/types";
 import css from "./Workspace.module.scss";
 
-const Workspace = () => {
-  const value = useContext(Context);
-  const { currentNote, editMode, getText, currentNoteLength } = value;
+const Workspace: React.FC<TWorkspace> = ({
+  currentNote,
+  editMode,
+  getText,
+  currentNoteLength,
+}) => {
   const { text, date } = currentNote;
 
-  const textValue = (e) => {
+  const textValue = (e: { target: { value: string } }) => {
     getText(e.target.value);
   };
 

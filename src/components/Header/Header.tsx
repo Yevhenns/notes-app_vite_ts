@@ -8,8 +8,17 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { THeader } from "../../types/types";
 import css from "./Header.module.scss";
 
-const Header: React.FC<THeader> = ({ burgerMenu, editMode, currentText, currentNoteLength, searchByName }) => {
-  
+const Header: React.FC<THeader> = ({
+  burgerMenu,
+  editMode,
+  currentText,
+  currentNoteLength,
+  searchByName,
+  addNewNote,
+  deleteNote,
+  enableEdit,
+  disabled,
+}) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const beforeTablet = useMediaQuery({ query: "(max-width: 479px)" });
@@ -39,7 +48,12 @@ const Header: React.FC<THeader> = ({ burgerMenu, editMode, currentText, currentN
 
   return (
     <header className={css.header}>
-      <HeaderButtonSet />
+      <HeaderButtonSet
+        addNewNote={addNewNote}
+        deleteNote={deleteNote}
+        enableEdit={enableEdit}
+        disabled={disabled}
+      />
       {beforeTablet && (
         <IconButton color="inherit" onClick={toggleMenu}>
           {!isMenuOpen ? (

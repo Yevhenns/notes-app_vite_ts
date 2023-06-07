@@ -6,8 +6,12 @@ import { BiEdit } from "react-icons/bi";
 import { nanoid } from "nanoid";
 import css from "./HeaderButtonSet.module.scss";
 
-const HeaderButtonSet: React.FC<THeaderButtonSet> = ({ addNewNote, deleteNote, enableEdit, disabled }) => {
-
+const HeaderButtonSet: React.FC<THeaderButtonSet> = ({
+  addNewNote,
+  deleteNote,
+  enableEdit,
+  disabled,
+}) => {
   const date = new Date().toISOString().slice(0, 19);
   const newItem = {
     id: nanoid(),
