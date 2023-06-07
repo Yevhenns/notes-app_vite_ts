@@ -1,58 +1,55 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useMediaQuery } from "react-responsive";
-import { useContext } from "react";
-import Context from "../../Context";
 import HeaderButtonSet from "../HeaderButtonSet/HeaderButtonSet";
 import SearchBox from "../SearchBox/SearchBox ";
 import { IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import MenuIcon from "@mui/icons-material/Menu";
+import { THeader } from "../../types/types";
 import css from "./Header.module.scss";
 
-const Header = () => {
-  const value = useContext(Context);
-  const { burgerMenu, editMode, currentText, currentNoteLength } = value;
-
-  const [menu, setMenu] = useState(false);
+const Header: React.FC<THeader> = ({ burgerMenu, editMode, currentText, currentNoteLength, searchByName }) => {
+  
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const beforeTablet = useMediaQuery({ query: "(max-width: 479px)" });
   const tablet = useMediaQuery({ query: "(min-width: 480px)" });
 
   useEffect(() => {
-    if (tablet) setMenu(false);
+    if (tablet) setIsMenuOpen(false);
   }, [tablet]);
 
   useEffect(() => {
-    burgerMenu(menu);
-  }, [burgerMenu, menu]);
+    burgerMenu(isMenuOpen);
+  }, [burgerMenu, isMenuOpen]);
 
   useEffect(() => {
     if (editMode) {
-      setMenu(true);
+      setIsMenuOpen(true);
     }
   }, [editMode]);
 
   useEffect(() => {
     if (currentText === null || currentNoteLength === 0) {
-      setMenu(false);
+      setIsMenuOpen(false);
     }
   }, [currentNoteLength, currentText]);
 
-  const toggleMenu = () => setMenu((value) => !value);
+  const toggleMenu = () => setIsMenuOpen((value) => !value);
 
   return (
     <header className={css.header}>
       <HeaderButtonSet />
       {beforeTablet && (
         <IconButton color="inherit" onClick={toggleMenu}>
-          {!menu ? (
+          {!isMenuOpen ? (
             <MenuIcon sx={{ fontSize: "40px" }} />
           ) : (
             <CloseIcon sx={{ fontSize: "40px" }} />
           )}
         </IconButton>
       )}
-      {tablet && <SearchBox />}
+      {tablet && <SearchBox searchByName={searchByName} />}
     </header>
   );
 };

@@ -43,7 +43,7 @@ const App = () => {
     }
   }, [currentNoteId, currentText, dispatch]);
 
-  const burgerMenu = (isMenuOpen) => {
+  const burgerMenu = (isMenuOpen: boolean) => {
     setMenu(isMenuOpen);
   };
 
@@ -75,7 +75,7 @@ const App = () => {
     setCurrentText(text);
   };
 
-  const searchByName = (searchText) => {
+  const searchByName = (searchText: string) => {
     setFilterValue(searchText.toLowerCase());
   };
 

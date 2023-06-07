@@ -1,12 +1,10 @@
-import { useContext } from "react";
-import Context from "../../Context";
+import React from "react";
+import { TSearchBox } from "../../types/types";
 import css from "./SearchBox.module.scss";
 
-const SearchBox = () => {
-  const value = useContext(Context);
-  const { searchByName } = value;
+const SearchBox: React.FC<TSearchBox> = ({ searchByName }) => {
 
-  const textValue = (e) => {
+  const textValue = (e: { target: { value: string; }; }) => {
     searchByName(e.target.value);
   };
 

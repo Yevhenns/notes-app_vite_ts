@@ -1,14 +1,12 @@
-import { useContext } from "react";
-import Context from "../../Context";
+import React from "react";
+import { THeaderButtonSet } from "../../types/types";
 import { AiOutlinePlus } from "react-icons/ai";
 import { RiDeleteBin4Line } from "react-icons/ri";
 import { BiEdit } from "react-icons/bi";
 import { nanoid } from "nanoid";
 import css from "./HeaderButtonSet.module.scss";
 
-const HeaderButtonSet = () => {
-  const value = useContext(Context);
-  const { addNewNote, deleteNote, enableEdit, disabled } = value;
+const HeaderButtonSet: React.FC<THeaderButtonSet> = ({ addNewNote, deleteNote, enableEdit, disabled }) => {
 
   const date = new Date().toISOString().slice(0, 19);
   const newItem = {
