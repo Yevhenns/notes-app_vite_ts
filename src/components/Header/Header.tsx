@@ -5,7 +5,6 @@ import SearchBox from "../SearchBox/SearchBox ";
 import { IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import MenuIcon from "@mui/icons-material/Menu";
-import { THeader } from "../../types/types";
 import css from "./Header.module.scss";
 
 const Header: React.FC<THeader> = ({

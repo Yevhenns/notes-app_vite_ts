@@ -1,10 +1,10 @@
-export interface INoteItem {
+interface INoteItem {
   id: string;
   text: string;
   date: string;
 }
 
-export interface INotes {
+type TNotes = {
   notesAll: INoteItem[];
   disabled: boolean;
   editMode: boolean;
@@ -20,24 +20,24 @@ export interface INotes {
   searchByName: (searchText: string) => void;
   burgerMenu: (isMenuOpen: boolean) => void;
   getText: (text: string) => void;
-}
+};
 
-export type TShowNote = Pick<INotes, "showNote">;
+type TShowNote = Pick<TNotes, "showNote">;
 
-export type THeaderButtonSet = Pick<
-  INotes,
+type THeaderButtonSet = Pick<
+  TNotes,
   "addNewNote" | "deleteNote" | "enableEdit" | "disabled"
 >;
 
-export type TSearchBox = Pick<INotes, "searchByName">;
+type TSearchBox = Pick<TNotes, "searchByName">;
 
-export type THeader = Omit<
-  INotes,
+type THeader = Omit<
+  TNotes,
   "notesAll" | "menu" | "filterValue" | "currentNote" | "showNote" | "getText"
 >;
 
-export type TMain = Omit<
-  INotes,
+type TMain = Omit<
+  TNotes,
   | "disabled"
   | "currentText"
   | "addNewNote"
@@ -46,9 +46,9 @@ export type TMain = Omit<
   | "burgerMenu"
 >;
 
-export type TSideBar = Pick<INotes, "notesAll" | "showNote" | "filterValue">;
+type TSideBar = Pick<TNotes, "notesAll" | "showNote" | "filterValue">;
 
-export type TWorkspace = Pick<
-  INotes,
+type TWorkspace = Pick<
+  TNotes,
   "currentNote" | "editMode" | "getText" | "currentNoteLength"
 >;

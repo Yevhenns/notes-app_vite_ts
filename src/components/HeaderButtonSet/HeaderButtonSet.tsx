@@ -1,5 +1,4 @@
 import React from "react";
-import { THeaderButtonSet } from "../../types/types";
 import { AiOutlinePlus } from "react-icons/ai";
 import { RiDeleteBin4Line } from "react-icons/ri";
 import { BiEdit } from "react-icons/bi";

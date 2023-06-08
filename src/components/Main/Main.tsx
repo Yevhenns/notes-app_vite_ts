@@ -4,7 +4,6 @@ import SearchBox from "../SearchBox/SearchBox ";
 import Sidebar from "../Sidebar/Sidebar";
 import Workspace from "../Workspace/Workspace";
 import { Box } from "@mui/material";
-import { TMain } from "../../types/types";
 import css from "./Main.module.scss";
 
 const Main: React.FC<TMain> = ({

@@ -1,5 +1,4 @@
 import React from "react";
-import { TSearchBox } from "../../types/types";
 import css from "./SearchBox.module.scss";
 
 const SearchBox: React.FC<TSearchBox> = ({ searchByName }) => {

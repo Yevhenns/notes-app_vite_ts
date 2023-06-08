@@ -1,5 +1,4 @@
 import React from "react";
-import { TWorkspace } from "../../types/types";
 import css from "./Workspace.module.scss";
 
 const Workspace: React.FC<TWorkspace> = ({
