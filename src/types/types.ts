@@ -31,30 +31,19 @@ export type THeaderButtonSet = Pick<
 
 export type TSearchBox = Pick<INotes, "searchByName">;
 
-export type THeader = Pick<
+export type THeader = Omit<
   INotes,
-  | "burgerMenu"
-  | "editMode"
+  "notesAll" | "menu" | "filterValue" | "currentNote" | "showNote" | "getText"
+>;
+
+export type TMain = Omit<
+  INotes,
+  | "disabled"
   | "currentText"
-  | "currentNoteLength"
-  | "searchByName"
   | "addNewNote"
   | "deleteNote"
   | "enableEdit"
-  | "disabled"
->;
-
-export type TMain = Pick<
-  INotes,
-  | "notesAll"
-  | "menu"
-  | "searchByName"
-  | "showNote"
-  | "filterValue"
-  | "currentNote"
-  | "editMode"
-  | "getText"
-  | "currentNoteLength"
+  | "burgerMenu"
 >;
 
 export type TSideBar = Pick<INotes, "notesAll" | "showNote" | "filterValue">;
