@@ -1,5 +1,4 @@
 import React from "react";
-import { INoteItem, TShowNote } from "../../types/types";
 import css from "./ListItem.module.scss";
 
 const ListItem: React.FC<INoteItem & TShowNote> = ({

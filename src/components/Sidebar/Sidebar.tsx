@@ -1,6 +1,5 @@
 import React from "react";
 import ListItem from "../ListItem/ListItem";
-import { TSideBar } from "../../types/types";
 import css from "./Sidebar.module.scss";
 
 const Sidebar: React.FC<TSideBar> = ({ notesAll, showNote, filterValue }) => {

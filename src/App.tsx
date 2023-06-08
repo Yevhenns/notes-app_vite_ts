@@ -8,7 +8,6 @@ import {
 } from "./redux/notesSlice";
 import Header from "./components/Header/Header";
 import Main from "./components/Main/Main";
-import { INoteItem } from "./types/types";
 import css from "./App.module.scss";
 
 const App: React.FC = () => {
